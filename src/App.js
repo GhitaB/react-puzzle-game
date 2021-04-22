@@ -11,7 +11,11 @@ window.board = [
 
 const BlocksRow = ({items, rowIndex}) => {
   const blocksListing = items.map(function(block, index) {
-    return (<div className="block">{block}</div>);
+    return (
+      <div className={"block row-" + rowIndex + " column-" + index + (block === 0 ? " empty" : "")}>
+        {block}
+      </div>
+    );
   });
   return(blocksListing)
 }
