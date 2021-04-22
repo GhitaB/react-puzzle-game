@@ -46,3 +46,9 @@ body {
   background: #555555;
   color: #555555;
 }
+
+.start-game {
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}

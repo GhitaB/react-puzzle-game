@@ -12,7 +12,7 @@ window.id = 0;
 window.generateKey = () => {
   window.id += 1;
   return window.id;
-}
+};
 
 const Block = ({number, row, column}) => {
   return (
@@ -44,9 +44,14 @@ const GameBoard = () => {
     return rowsListing;
   }
 
+  const startGame = () => {
+    console.log("Start");
+  }
+
   return (
     <div className="game-board">
       {createBoard()}
+      <button className="start-game" onClick={startGame}>Start</button>
     </div>
   );
 }
