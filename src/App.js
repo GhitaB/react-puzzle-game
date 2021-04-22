@@ -9,18 +9,22 @@ window.board = [
 ];
 window.currentRow = 3;
 window.currentColumn = 3;
-window.getMovableBlocks = () => {
+window.getMovableBlocks = (asText) => {
   let x = window.currentRow;
   let y = window.currentColumn;
 
                      //     top        right      bottom       left
   let possibleMoves = [[x - 1 , y], [x, y + 1], [x + 1, y], [x, y - 1]];
 
-  return possibleMoves.map((move, index) => {
-    return (
-      ".block.row-" + move[0] + ".column-" + move[1]
-    );
-  });
+  if (asText === true) {
+    return possibleMoves.map((move, index) => {
+      return (
+        ".block.row-" + move[0] + ".column-" + move[1]
+      );
+    });
+  } else {
+    return possibleMoves;
+  }
 }
 
 window.id = 0;
@@ -32,18 +36,30 @@ window.generateKey = () => {
 window.startGame = () => {
   const disableNotMovableBlocks = () => {
     $(".block").addClass("disabled");
-    window.getMovableBlocks().forEach((selector) => {
+    window.getMovableBlocks(true).forEach((selector) => {
       $(selector).removeClass("disabled");
     });
   }
 
   $("button.start-game").hide();
   disableNotMovableBlocks();
+
+  $(".block").on("click", (ev) => {
+    let $block = $(ev.target);
+
+    if (!$block.hasClass("disabled")) {
+      let col = $block.attr("data-col");
+      let row = $block.attr("data-row");
+      alert("Move (" + row + "," + col + ") to (" + row + "," + col + ")");
+    }
+  });
 }
 
 const Block = ({number, row, column}) => {
   return (
-    <div key={window.generateKey()} className={"block disabled row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
+    <div key={window.generateKey()}
+         className={"block disabled row-" + row + " column-" + column + (number === 0 ? " empty" : "")}
+         data-col={column} data-row={row}>
       {number}
     </div>
   );
