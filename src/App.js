@@ -134,7 +134,7 @@ window.startGame = async () => {
   window.disableNotMovableBlocks();
 
   let wait = 300;
-  window.numberMoves = window.level * 2;
+  window.numberMoves = window.level * 4;
 
   for (var move = 1; move <= window.numberMoves; move++) {
     window.setStatus("Wait... I prepare it for you. (" + (window.numberMoves - move).toString() + ")");

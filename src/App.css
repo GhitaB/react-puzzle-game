@@ -51,8 +51,8 @@ body {
 }
 
 .block.empty {
-  background: #685044;
-  color: #685044;
+  background: #3a405a;
+  color: #3a405a;
 }
 
 .start-game {
@@ -60,6 +60,15 @@ body {
   padding: 20px;
   width: 100%;
   font-size: 20px;
+  background: #99b2dd;
+  color: #3a405a;
+  border: none;
+  border-radius: 10px;
+}
+
+.start-game:hover {
+  background: #f9dec9;
+  cursor: pointer;
 }
 
 p.status {
