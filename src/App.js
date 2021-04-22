@@ -8,10 +8,10 @@ window.board = [
   [13, 14, 15, 0]
 ];
 window.currentRow = 3;
-window.currentColumn = 3;
+window.currentCol = 3;
 window.getMovableBlocks = (asText) => {
   let x = window.currentRow;
-  let y = window.currentColumn;
+  let y = window.currentCol;
 
                      //     top        right      bottom       left
   let possibleMoves = [[x - 1 , y], [x, y + 1], [x + 1, y], [x, y - 1]];
@@ -27,6 +27,39 @@ window.getMovableBlocks = (asText) => {
   }
 }
 
+window.disableNotMovableBlocks = () => {
+  $(".block").addClass("disabled");
+  window.getMovableBlocks(true).forEach((selector) => {
+    $(selector).removeClass("disabled");
+  });
+}
+
+window.refreshBoard = () => {
+  for (var row = 0; row < 4; row++) {
+    for (var col = 0; col < 4; col++) {
+      $(".block.row-" + row + ".column-" + col).text(window.board[row][col]);
+    }
+  }
+  window.disableNotMovableBlocks();
+}
+
+window.moveBlock = (row, col) => {
+  let x = window.currentRow;
+  let y = window.currentCol;
+  let number = window.board[row][col];
+  window.board[x][y] = number;
+  window.currentRow = row;
+  window.currentCol = col;
+  window.board[row][col] = 0;
+  let $oldEmptyBlock = $(".block.row-" + x + ".column-" + y);
+  let $newEmptyBlock = $(".block.row-" + row + ".column-" + col);
+
+  $oldEmptyBlock.removeClass("empty");
+  $newEmptyBlock.addClass("empty");
+
+  window.refreshBoard();
+};
+
 window.id = 0;
 window.generateKey = () => {
   window.id += 1;
@@ -34,15 +67,9 @@ window.generateKey = () => {
 };
 
 window.startGame = () => {
-  const disableNotMovableBlocks = () => {
-    $(".block").addClass("disabled");
-    window.getMovableBlocks(true).forEach((selector) => {
-      $(selector).removeClass("disabled");
-    });
-  }
 
   $("button.start-game").hide();
-  disableNotMovableBlocks();
+  window.disableNotMovableBlocks();
 
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
@@ -50,7 +77,7 @@ window.startGame = () => {
     if (!$block.hasClass("disabled")) {
       let col = $block.attr("data-col");
       let row = $block.attr("data-row");
-      alert("Move (" + row + "," + col + ") to (" + row + "," + col + ")");
+      window.moveBlock(row, col);
     }
   });
 }
