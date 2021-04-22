@@ -9,16 +9,24 @@ window.board = [
 ];
 
 
+const Block = ({number, row, column}) => {
+  return (
+    <div className={"block row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
+      {number}
+    </div>
+  );
+}
+
+
 const BlocksRow = ({items, rowIndex}) => {
   const blocksListing = items.map(function(block, index) {
     return (
-      <div className={"block row-" + rowIndex + " column-" + index + (block === 0 ? " empty" : "")}>
-        {block}
-      </div>
+      <Block number={block} row={rowIndex} column={index} />
     );
   });
   return(blocksListing)
 }
+
 
 const GameBoard = () => {
   const rowsListing = window.board.map(function(row, index) {
@@ -36,6 +44,7 @@ const GameBoard = () => {
   );
 }
 
+
 const Game = () => {
   return (
     <div className="container">
@@ -43,6 +52,7 @@ const Game = () => {
     </div>
   );
 }
+
 
 function App() {
   return (
