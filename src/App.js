@@ -69,8 +69,12 @@ window.getMovableBlocks = (asText) => {
   }
 }
 
-window.disableNotMovableBlocks = () => {
+window.disableAllBlocks = () => {
   $(".block").addClass("disabled");
+}
+
+window.disableNotMovableBlocks = () => {
+  window.disableAllBlocks();
   window.getMovableBlocks(true).forEach((selector) => {
     $(selector).removeClass("disabled");
   });
@@ -167,6 +171,7 @@ window.startGame = async () => {
         $("button.start-game").show();
         window.level += 1;
         window.setStatus("YEEEES! You are smart! :) Congrats! Moves: " + window.numberMoves + " New level: " + window.level);
+        window.disableAllBlocks();
       }
     }
   });

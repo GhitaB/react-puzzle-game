@@ -1,9 +1,17 @@
+/* Palette: https://coolors.co/3a405a-f9dec9-99b2dd-e9afa3-685044
+ * #3a405a
+ * #f9dec9
+ * #99b2dd
+ * #e9afa3
+ * #685044
+ */
+
 body {
-  background: #111111;
+  background: #685044;
 }
 
 .container {
-  background: #555555;
+  background: #3a405a;
   width: 260px;
   margin-top: 20px;
   margin-left: auto;
@@ -13,7 +21,7 @@ body {
 }
 
 .game-board {
-  background: #555555;
+  background: #3a405a;
   overflow: auto;
   width: 230px;
   margin-left: auto;
@@ -26,10 +34,10 @@ body {
   font-size: 20px;
   float: left;
   text-align: center;
-  border: 3px solid #555555;
+  border: 3px solid #3a405a;
   padding-top: 25px;
-  background: #DDDDDD;
-  color: #555555;
+  background: #e9afa3;
+  color: #3a405a;
   user-select: none;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -38,13 +46,13 @@ body {
 }
 
 .block:not(.empty, .disabled):hover {
-  background: #EEEEEE;
+  background: #f9dec9;
   cursor: pointer;
 }
 
 .block.empty {
-  background: #555555;
-  color: #555555;
+  background: #685044;
+  color: #685044;
 }
 
 .start-game {
