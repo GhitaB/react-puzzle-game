@@ -1,6 +1,10 @@
 import './App.css';
 import $ from 'jquery';
 
+window.setStatus = (text) => {
+  $(".status").text(text);
+}
+
 window.board = [
   [1, 2, 3, 4],
   [5, 6, 7, 8],
@@ -99,6 +103,7 @@ window.startGame = async () => {
 
   $("button.start-game").hide();
   window.disableNotMovableBlocks();
+  window.setStatus("Wait... I prepare it for you.");
 
   let wait = 100;
   for (var move = 1; move <= 500; move++) {
@@ -106,12 +111,14 @@ window.startGame = async () => {
     window.randomMove();
     if (move < 450) {
       if (wait > 10) {
-        wait -= 1;
+        wait -= 5;
       }
     } else {
       wait += 2;
     }
   }
+
+  window.setStatus("Yeah! You can play now. Click the movable blocks.");
 
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
@@ -161,10 +168,13 @@ const GameBoard = () => {
   }
 
   return (
-    <div className="game-board">
-      {createBoard()}
-      <button className="start-game" onClick={startGame}>Start</button>
-    </div>
+    <>
+      <div className="game-board">
+        {createBoard()}
+        <button className="start-game" onClick={startGame}>Start</button>
+      </div>
+      <p className="status">Press Start to start the game.</p>
+    </>
   );
 }
 
