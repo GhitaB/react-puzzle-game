@@ -28,7 +28,18 @@ body {
   text-align: center;
   border: 3px solid #555555;
   padding-top: 25px;
-  background: #777777;
+  background: #DDDDDD;
+  color: #555555;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.block:not(.empty):hover {
+  background: #EEEEEE;
+  cursor: pointer;
 }
 
 .block.empty {
