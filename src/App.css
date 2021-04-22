@@ -30,3 +30,8 @@ body {
   padding-top: 25px;
   background: #777777;
 }
+
+.block.empty {
+  background: #555555;
+  color: #555555;
+}
