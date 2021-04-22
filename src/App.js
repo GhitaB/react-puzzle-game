@@ -5,7 +5,8 @@ window.setStatus = (text) => {
   $(".status").text(text);
 }
 
-window.numberMoves = 500;
+window.level = 1;
+window.numberMoves = 0;
 
 window.board = [
   [1, 2, 3, 4],
@@ -13,6 +14,28 @@ window.board = [
   [9, 10, 11, 12],
   [13, 14, 15, 0]
 ];
+
+
+window.correctBoard = [
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+  [13, 14, 15, 0]
+];
+
+window.goodBlocks = () => {
+  let goodBlocks = 0;
+  for (var row = 0; row < 4; row++) {
+    for (var col = 0; col < 4; col++) {
+      if(window.board[row][col] === window.correctBoard[row][col]) {
+        goodBlocks += 1;
+      }
+    }
+  }
+
+  return goodBlocks;
+}
+
 window.currentRow = 3;
 window.currentCol = 3;
 window.getMovableBlocks = (asText) => {
@@ -106,7 +129,9 @@ window.startGame = async () => {
   $("button.start-game").hide();
   window.disableNotMovableBlocks();
 
-  let wait = 100;
+  let wait = 300;
+  window.numberMoves = window.level * 2;
+
   for (var move = 1; move <= window.numberMoves; move++) {
     window.setStatus("Wait... I prepare it for you. (" + (window.numberMoves - move).toString() + ")");
     await sleep(wait);
@@ -118,6 +143,10 @@ window.startGame = async () => {
     } else {
       wait += 10;
     }
+
+    if(window.goodBlocks() === 16) {
+      window.randomMove();  // Make sure it's not already solved. Haha. :))
+    }
   }
 
   window.numberMoves = 0;
@@ -128,10 +157,17 @@ window.startGame = async () => {
 
     if (!$block.hasClass("disabled")) {
       window.numberMoves += 1;
-      window.setStatus("You are smart. Moves: " + window.numberMoves);
       let col = parseInt($block.attr("data-col"));
       let row = parseInt($block.attr("data-row"));
       window.moveBlock(row, col);
+
+      let goodPositions = window.goodBlocks();
+      window.setStatus("Moves: " + window.numberMoves + " Good: " + goodPositions + "/16");
+      if (goodPositions === 16) {
+        $("button.start-game").show();
+        window.level += 1;
+        window.setStatus("YEEEES! You are smart! :) Congrats! Moves: " + window.numberMoves + " New level: " + window.level);
+      }
     }
   });
 }
