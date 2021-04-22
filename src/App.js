@@ -8,10 +8,15 @@ window.board = [
   [13, 14, 15, 0]
 ];
 
+window.id = 0;
+window.generateKey = () => {
+  window.id += 1;
+  return window.id;
+}
 
 const Block = ({number, row, column}) => {
   return (
-    <div className={"block row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
+    <div key={window.generateKey()} className={"block row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
       {number}
     </div>
   );
@@ -21,7 +26,9 @@ const Block = ({number, row, column}) => {
 const BlocksRow = ({items, rowIndex}) => {
   const blocksListing = items.map(function(block, index) {
     return (
-      <Block number={block} row={rowIndex} column={index} />
+      <span key={window.generateKey()}>
+        <Block number={block} row={rowIndex} column={index} />
+      </span>
     );
   });
   return(blocksListing)
@@ -30,7 +37,7 @@ const BlocksRow = ({items, rowIndex}) => {
 
 const GameBoard = () => {
   const rowsListing = window.board.map(function(row, index) {
-    return (<BlocksRow items={row} rowIndex={index} />);
+    return (<span key={window.generateKey()}><BlocksRow items={row} rowIndex={index} /></span>);
   });
 
   const createBoard = () => {
@@ -46,6 +53,8 @@ const GameBoard = () => {
 
 
 const Game = () => {
+  console.log("INIT");
+
   return (
     <div className="container">
       <GameBoard />
