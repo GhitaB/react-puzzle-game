@@ -1,5 +1,5 @@
 import './App.css';
-
+import $ from 'jquery';
 
 window.board = [
   [1, 2, 3, 4],
@@ -13,6 +13,10 @@ window.generateKey = () => {
   window.id += 1;
   return window.id;
 };
+
+window.startGame = () => {
+  $("button").hide();
+}
 
 const Block = ({number, row, column}) => {
   return (
@@ -45,7 +49,7 @@ const GameBoard = () => {
   }
 
   const startGame = () => {
-    console.log("Start");
+    window.startGame();
   }
 
   return (
