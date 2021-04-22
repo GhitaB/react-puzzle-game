@@ -7,6 +7,21 @@ window.board = [
   [9, 10, 11, 12],
   [13, 14, 15, 0]
 ];
+window.currentRow = 3;
+window.currentColumn = 3;
+window.getMovableBlocks = () => {
+  let x = window.currentRow;
+  let y = window.currentColumn;
+
+                     //     top        right      bottom       left
+  let possibleMoves = [[x - 1 , y], [x, y + 1], [x + 1, y], [x, y - 1]];
+
+  return possibleMoves.map((move, index) => {
+    return (
+      ".block.row-" + move[0] + ".column-" + move[1]
+    );
+  });
+}
 
 window.id = 0;
 window.generateKey = () => {
@@ -15,7 +30,15 @@ window.generateKey = () => {
 };
 
 window.startGame = () => {
-  $("button").hide();
+  const disableNotMovableBlocks = () => {
+    $(".block").addClass("disabled");
+    window.getMovableBlocks().forEach((selector) => {
+      $(selector).removeClass("disabled");
+    });
+  }
+
+  $("button.start-game").hide();
+  disableNotMovableBlocks();
 }
 
 const Block = ({number, row, column}) => {

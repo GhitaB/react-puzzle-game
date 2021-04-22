@@ -37,7 +37,7 @@ body {
   -o-user-select: none;
 }
 
-.block:not(.empty):hover {
+.block:not(.empty, .disabled):hover {
   background: #EEEEEE;
   cursor: pointer;
 }
