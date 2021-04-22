@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-puzzle-game/static/css/main.d19beb81.chunk.css",
+    "main.js": "/react-puzzle-game/static/js/main.d48d02b8.chunk.js",
+    "main.js.map": "/react-puzzle-game/static/js/main.d48d02b8.chunk.js.map",
+    "runtime-main.js": "/react-puzzle-game/static/js/runtime-main.4a3801a7.js",
+    "runtime-main.js.map": "/react-puzzle-game/static/js/runtime-main.4a3801a7.js.map",
+    "static/js/2.029c6fd8.chunk.js": "/react-puzzle-game/static/js/2.029c6fd8.chunk.js",
+    "static/js/2.029c6fd8.chunk.js.map": "/react-puzzle-game/static/js/2.029c6fd8.chunk.js.map",
+    "static/js/3.cf215b2f.chunk.js": "/react-puzzle-game/static/js/3.cf215b2f.chunk.js",
+    "static/js/3.cf215b2f.chunk.js.map": "/react-puzzle-game/static/js/3.cf215b2f.chunk.js.map",
+    "index.html": "/react-puzzle-game/index.html",
+    "static/css/main.d19beb81.chunk.css.map": "/react-puzzle-game/static/css/main.d19beb81.chunk.css.map",
+    "static/js/2.029c6fd8.chunk.js.LICENSE.txt": "/react-puzzle-game/static/js/2.029c6fd8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4a3801a7.js",
+    "static/js/2.029c6fd8.chunk.js",
+    "static/css/main.d19beb81.chunk.css",
+    "static/js/main.d48d02b8.chunk.js"
+  ]
+}
