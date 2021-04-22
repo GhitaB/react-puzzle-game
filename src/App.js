@@ -13,8 +13,13 @@ window.getMovableBlocks = (asText) => {
   let x = window.currentRow;
   let y = window.currentCol;
 
-                     //     top        right      bottom       left
-  let possibleMoves = [[x - 1 , y], [x, y + 1], [x + 1, y], [x, y - 1]];
+
+  let possibleMoves = [
+    [x - 1 , y],   // top
+    [x, y + 1],    // right
+    [x + 1, y],    // bottom
+    [x, y - 1]     // left
+  ];
 
   if (asText === true) {
     return possibleMoves.map((move, index) => {
@@ -74,9 +79,12 @@ window.startGame = () => {
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
 
-    if (!$block.hasClass("disabled")) {
       let col = $block.attr("data-col");
       let row = $block.attr("data-row");
+
+    if (!$block.hasClass("disabled")) {
+      let col = parseInt($block.attr("data-col"));
+      let row = parseInt($block.attr("data-row"));
       window.moveBlock(row, col);
     }
   });
