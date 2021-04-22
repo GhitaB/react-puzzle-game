@@ -5,6 +5,8 @@ window.setStatus = (text) => {
   $(".status").text(text);
 }
 
+window.numberMoves = 500;
+
 window.board = [
   [1, 2, 3, 4],
   [5, 6, 7, 8],
@@ -103,27 +105,30 @@ window.startGame = async () => {
 
   $("button.start-game").hide();
   window.disableNotMovableBlocks();
-  window.setStatus("Wait... I prepare it for you.");
 
   let wait = 100;
-  for (var move = 1; move <= 500; move++) {
+  for (var move = 1; move <= window.numberMoves; move++) {
+    window.setStatus("Wait... I prepare it for you. (" + (window.numberMoves - move).toString() + ")");
     await sleep(wait);
     window.randomMove();
-    if (move < 450) {
+    if (move < 470) {
       if (wait > 10) {
         wait -= 5;
       }
     } else {
-      wait += 2;
+      wait += 10;
     }
   }
 
+  window.numberMoves = 0;
   window.setStatus("Yeah! You can play now. Click the movable blocks.");
 
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
 
     if (!$block.hasClass("disabled")) {
+      window.numberMoves += 1;
+      window.setStatus("You are smart. Moves: " + window.numberMoves);
       let col = parseInt($block.attr("data-col"));
       let row = parseInt($block.attr("data-row"));
       window.moveBlock(row, col);
