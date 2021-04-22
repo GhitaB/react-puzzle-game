@@ -73,16 +73,45 @@ window.moveBlock = (row, col) => {
   window.refreshBoard();
 };
 
+window.randomBetween = (min, max) => {
+  // return a random number between min and max
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+window.randomMove = () => {
+  let moves = window.getMovableBlocks(false);
+  let randomPosition = window.randomBetween(0, moves.length - 1);
+  let randomMove = moves[randomPosition];
+
+  window.moveBlock(randomMove[0], randomMove[1]);
+}
+
 window.id = 0;
 window.generateKey = () => {
   window.id += 1;
   return window.id;
 };
 
-window.startGame = () => {
+window.startGame = async () => {
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   $("button.start-game").hide();
   window.disableNotMovableBlocks();
+
+  let wait = 100;
+  for (var move = 1; move <= 500; move++) {
+    await sleep(wait);
+    window.randomMove();
+    if (move < 450) {
+      if (wait > 10) {
+        wait -= 1;
+      }
+    } else {
+      wait += 2;
+    }
+  }
 
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
