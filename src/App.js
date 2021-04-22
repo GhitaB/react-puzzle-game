@@ -43,7 +43,7 @@ window.startGame = () => {
 
 const Block = ({number, row, column}) => {
   return (
-    <div key={window.generateKey()} className={"block row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
+    <div key={window.generateKey()} className={"block disabled row-" + row + " column-" + column + (number === 0 ? " empty" : "")}>
       {number}
     </div>
   );
@@ -85,8 +85,6 @@ const GameBoard = () => {
 
 
 const Game = () => {
-  console.log("INIT");
-
   return (
     <div className="container">
       <GameBoard />
