@@ -1,10 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+
+
+window.board = [
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+  [13, 14, 15, 0]
+];
+
+
+const BlocksRow = ({items, rowIndex}) => {
+  const blocksListing = items.map(function(block, index) {
+    return (<div>{block}</div>);
+  });
+  return(blocksListing)
+}
+
+const GameBoard = () => {
+  const rowsListing = window.board.map(function(row, index) {
+    return (<BlocksRow items={row} rowIndex={index} />);
+  });
+
+  const createBoard = () => {
+    return rowsListing;
+  }
+
+  return (
+    <div className="game-board">
+      {createBoard()}
+    </div>
+  );
+}
 
 const Game = () => {
   return (
     <div className="container">
-      Game board
+      <GameBoard />
     </div>
   );
 }
