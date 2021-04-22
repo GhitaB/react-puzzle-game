@@ -11,7 +11,7 @@ window.board = [
 
 const BlocksRow = ({items, rowIndex}) => {
   const blocksListing = items.map(function(block, index) {
-    return (<div>{block}</div>);
+    return (<div className="block">{block}</div>);
   });
   return(blocksListing)
 }
