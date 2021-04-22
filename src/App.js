@@ -21,14 +21,22 @@ window.getMovableBlocks = (asText) => {
     [x, y - 1]     // left
   ];
 
+  let validMoves = [];
+
+  for (var move = 0; move < 4; move++) {
+    let thisMove = possibleMoves[move];
+    if (thisMove[0] > -1 && thisMove[0] < 4 && thisMove[1] > -1 && thisMove[1] < 4) {
+      validMoves.push(thisMove);
+    }
+  }
   if (asText === true) {
-    return possibleMoves.map((move, index) => {
+    return validMoves.map((move, index) => {
       return (
         ".block.row-" + move[0] + ".column-" + move[1]
       );
     });
   } else {
-    return possibleMoves;
+    return validMoves;
   }
 }
 
@@ -78,9 +86,6 @@ window.startGame = () => {
 
   $(".block").on("click", (ev) => {
     let $block = $(ev.target);
-
-      let col = $block.attr("data-col");
-      let row = $block.attr("data-row");
 
     if (!$block.hasClass("disabled")) {
       let col = parseInt($block.attr("data-col"));
