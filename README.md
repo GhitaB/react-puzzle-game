@@ -1,3 +1,7 @@
+# Puzzle with numbers
+
+## [Play here](https://ghitab.github.io/react-puzzle-game/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
